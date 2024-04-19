@@ -1,5 +1,10 @@
 # Changelog
 
+## Version 0.0.3
+
+### Added
+- Now scrolls if selecting outside the visible part of the document.
+
 ## Version 0.0.2
 
 ### Added

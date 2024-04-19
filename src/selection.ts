@@ -14,6 +14,14 @@ function endChar(editor: vscode.TextEditor, line: number) {
     return editor.document.lineAt(line).range.end.character;
 }
 
+function getActiveLineRange(editor: vscode.TextEditor) {
+    let activeLine = editor.selection.active.line;
+    let activeLineEndChar = endChar(editor, activeLine);
+    return new vscode.Range(
+        new vscode.Position(activeLine, 0),
+        new vscode.Position(activeLine, activeLineEndChar));    
+}
+
 function adjustedPositionAt(editor: vscode.TextEditor, line: number, location: Location) {
 
     let lastLine = editor.document.lineCount - 1;
@@ -46,15 +54,7 @@ function adjustedPositionAt(editor: vscode.TextEditor, line: number, location: L
 }
 
 function isPartialSelection(editor: vscode.TextEditor, dir: number) {
-    let activeLine = editor.selection.active.line;
-    let activeLineEndChar = endChar(editor, activeLine);
-    let currentLineRange = new vscode.Range(
-        new vscode.Position(activeLine, 0),
-        new vscode.Position(activeLine, activeLineEndChar));
-
-    let contains = editor.selection.contains(currentLineRange); 
-
-    return !contains;
+    return !editor.selection.contains(getActiveLineRange(editor));
 }
 
 function selectLine(editor: vscode.TextEditor, dir: number, amount: number) {
@@ -97,7 +97,8 @@ function selectLine(editor: vscode.TextEditor, dir: number, amount: number) {
             editor.selection.anchor,
             editor.selection.anchor
         );
-    } 
+    }
+    editor.revealRange(getActiveLineRange(editor));
 }
 
 export function selectLineUp(args: {}) {
