@@ -1,9 +1,14 @@
-# Change Log
+# Changelog
 
-All notable changes to the "bmx-local" extension will be documented in this file.
+## Version 0.0.2
 
-Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
+### Added
+- Include default keyboard shortcuts for line selection.
 
-## [Unreleased]
+### Changed
+- Refine line selection.
 
-- Initial release
+## Version 0.0.1
+
+### Added
+- Crude implementation of line selection.

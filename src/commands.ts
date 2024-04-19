@@ -1,13 +1,14 @@
 import * as vscode from 'vscode';
-import * as csel from './selection';
+import * as sel from './selection';
 
 export function registerCommands(context: vscode.ExtensionContext) {
     console.log('Registering commands');
-    context.subscriptions.push(vscode.commands.registerTextEditorCommand(
-            'bmx-local.selectLineUp', (editor, edit, args: {}) => {
-                //console.log(args);
-                csel.select_line(editor, edit, -1);}));
-    context.subscriptions.push(vscode.commands.registerTextEditorCommand(
-            'bmx-local.selectLineDown', (editor, edit, args) => {
-                csel.select_line(editor, edit, 1);}));
+    context.subscriptions.push(vscode.commands.registerCommand(
+        'bmx-local.selectLineUp', (args: {}) => {
+            sel.selectLineUp(args);
+        }));
+    context.subscriptions.push(vscode.commands.registerCommand(
+        'bmx-local.selectLineDown', (args: {}) => {
+            sel.selectLineDown(args);
+        }));
 }
