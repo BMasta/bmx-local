@@ -6,29 +6,47 @@
     "url": "https://github.com/BMasta/bmx-local.git"
   },
   "displayName": "BMX - Local",
-  "description": "My personal extension for local (UI-side) operations.",
-  "version": "0.0.3",
-  "engines": {
-    "vscode": "^1.88.0"
-  },
-  "categories": [
-    "Other"
-  ],
+  "description": "My personal extension designed to run on the local machine.",
+  "version": "0.1.0",
+  "engines": {"vscode": "^1.88.0"},
+  "categories": ["Other"],
+  "extensionKind": ["ui"],
   "activationEvents": [],
   "main": "./dist/extension.js",
   "contributes": {
     "commands": [
       {
         "command": "bmx-local.selectLineUp",
-        "category": "BMX",
+        "category": "BMX Local",
         "title": "Select line up"
       },
       {
         "command": "bmx-local.selectLineDown",
-        "category": "BMX",
+        "category": "BMX Local",
         "title": "Select line down"
+      },
+      {
+        "command": "bmx-local.multiStateFold",
+        "category": "BMX Local",
+        "title": "Multi-state fold"
       }
     ],
+    "menus": {
+      "commandPalette": [
+        {
+            "command": "bmx-local.selectLineUp",
+            "when": "false"
+        },
+        {
+          "command": "bmx-local.selectLineDown",
+          "when": "false"
+        },
+        {
+          "command": "bmx-local.multiStateFold",
+          "when": "false"
+        }
+      ]
+    },
     "keybindings":[
       {
           "key": "shift+up",
@@ -49,6 +67,26 @@
           "key": "ctrl+shift+up",
           "command": "-cursorUpSelect",
           "when": "textInputFocus"
+      },
+      {
+          "key": "shift+up",
+          "command": "cursorUpSelect",
+          "when": "textInputFocus && !editorFocus"
+      },
+      {
+          "key": "shift+down",
+          "command": "cursorDownSelect",
+          "when": "textInputFocus && !editorFocus"
+      },
+      {
+          "key": "ctrl+shift+down",
+          "command": "cursorDownSelect",
+          "when": "textInputFocus && !editorFocus"
+      },
+      {
+          "key": "ctrl+shift+up",
+          "command": "cursorUpSelect",
+          "when": "textInputFocus && !editorFocus"
       },
       {
         "command": "bmx-local.selectLineUp",
@@ -75,6 +113,45 @@
         },
         "key": "ctrl+shift+down",
         "when": "editorFocus"
+      },
+
+
+
+      {
+        "key": "ctrl+q",
+        "command": "-workbench.action.quickOpenView"
+      },
+      {
+        "key": "ctrl+q",
+        "command": "bmx-local.multiStateFold"
+      },
+
+
+
+      {
+        "key": "ctrl+b",
+        "command": "-workbench.action.toggleSidebarVisibility"
+      },
+      {
+        "key": "ctrl+b",
+        "command": "runCommands",
+        "args": {
+            "commands": [
+                "workbench.action.toggleActivityBarVisibility",
+                "workbench.action.toggleSidebarVisibility"
+            ]
+        },
+        "when": "(config.workbench.activityBar.location != 'hidden' && sideBarVisible) || (config.workbench.activityBar.location == 'hidden' && !sideBarVisible)"
+      },
+      {
+        "key": "ctrl+b",
+        "command": "runCommands",
+        "args": {
+            "commands": [
+                "workbench.action.toggleSidebarVisibility"
+            ]
+        },
+        "when": "(config.workbench.activityBar.location == 'hidden' && sideBarVisible) || (config.workbench.activityBar.location != 'hidden' && !sideBarVisible)"
       }
     ]
   },
