@@ -3,36 +3,67 @@ My personal VSCode extension designed to run on the local machine.
 
 ## Commands
 
-### selectLineUp and selectLineDown
-Selects entire lines of text similar to vim's visual mode. Overrides default shift+up
+### cursorUp and cursorDown
+When select=true, selects entire lines of text similar to vim's visual mode. Overrides default shift+up
 and ctrl+shift+up when a text editor is focused.
+
+When select=false, moves the cursor instead of selecting.
+
+The number of lines to move/select is based on `amount` or `amountPercent`. If `amountPercent` is used,
+a minimum number of lines can be specified with `amountMin` and `amountMax`.
 
 ```jsonc
 // defaults
 {
-  "command": "bmx-local.selectLineUp",
+  "command": "bmx-local.cursorUp",
   "key": "shift+up",
-  "when": "editorFocus"
-},
-{
-  "command": "bmx-local.selectLineDown",
-  "key": "shift+down",
-  "when": "editorFocus"
-},
-{
-  "command": "bmx-local.selectLineUp",
   "args": {
-    "amount": 10
+    "select": true
+  },
+  "when": "editorFocus"
+},
+{
+  "command": "bmx-local.cursorDown",
+  "key": "shift+down",
+  "args": {
+    "select": true
+  },
+  "when": "editorFocus"
+},
+{
+  "command": "bmx-local.cursorUp",
+  "args": {
+    "amount": 10,
+    "select": true
   },
   "key": "ctrl+shift+up",
   "when": "editorFocus"
 },
 {
-  "command": "bmx-local.selectLineDown",
+  "command": "bmx-local.cursorDown",
   "args": {
-    "amount": 10
+    "amount": 10,
+    "select": true
   },
   "key": "ctrl+shift+down",
+  "when": "editorFocus"
+},
+{
+  "command": "bmx-local.cursorUp",
+  "args": {
+    "amountPercent": 10,
+    "amountMin": 20
+  },
+  "key": "ctrl+alt+shift+up",
+  "when": "editorFocus"
+},
+{
+  "command": "bmx-local.cursorDown",
+  "args": {
+    "amountPercent": 10,
+    "amountMin": 20
+  },
+  "key": "ctrl+alt+shift+down",
   "when": "editorFocus"
 }
 ```
@@ -42,10 +73,10 @@ Multi-state fold is a command that folds/unfolds regions in a document based
 on how many times it is triggered. \
 Moving the cursor will reset the trigger count. Overrides workbench.action.quickOpenView by default.
 
-- <b>1st trigger:</b> Unfold the smallest region that contains the cursor and 
+- <b>1st trigger:</b> Unfold the smallest region that contains the cursor and
 all of its child regions. \
 Fold everything else. Only operates on relevant regions.
-- <b>2nd trigger:</b> Unfold the biggest region that contains the cursor and 
+- <b>2nd trigger:</b> Unfold the biggest region that contains the cursor and
 all of its child regions. \
 Fold everything else. Only operates on relevant regions.
 - <b>3rd trigger:</b> Fold everything. Only operates on relevant regions.

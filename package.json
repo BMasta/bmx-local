@@ -7,23 +7,29 @@
   },
   "displayName": "BMX - Local",
   "description": "My personal extension designed to run on the local machine.",
-  "version": "0.1.0",
-  "engines": {"vscode": "^1.88.0"},
-  "categories": ["Other"],
-  "extensionKind": ["ui"],
+  "version": "0.2.0",
+  "engines": {
+    "vscode": "^1.88.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "extensionKind": [
+    "ui"
+  ],
   "activationEvents": [],
   "main": "./dist/extension.js",
   "contributes": {
     "commands": [
       {
-        "command": "bmx-local.selectLineUp",
+        "command": "bmx-local.cursorUp",
         "category": "BMX Local",
-        "title": "Select line up"
+        "title": "Cursor up"
       },
       {
-        "command": "bmx-local.selectLineDown",
+        "command": "bmx-local.cursorDown",
         "category": "BMX Local",
-        "title": "Select line down"
+        "title": "Cursor down"
       },
       {
         "command": "bmx-local.multiStateFold",
@@ -34,11 +40,11 @@
     "menus": {
       "commandPalette": [
         {
-            "command": "bmx-local.selectLineUp",
-            "when": "false"
+          "command": "bmx-local.cursorUp",
+          "when": "false"
         },
         {
-          "command": "bmx-local.selectLineDown",
+          "command": "bmx-local.cursorDown",
           "when": "false"
         },
         {
@@ -47,76 +53,99 @@
         }
       ]
     },
-    "keybindings":[
+    "keybindings": [
       {
-          "key": "shift+up",
-          "command": "-cursorUpSelect",
-          "when": "textInputFocus"
-      },
-      {
-          "key": "shift+down",
-          "command": "-cursorDownSelect",
-          "when": "textInputFocus"
-      },
-      {
-          "key": "ctrl+shift+down",
-          "command": "-cursorDownSelect",
-          "when": "textInputFocus"
-      },
-      {
-          "key": "ctrl+shift+up",
-          "command": "-cursorUpSelect",
-          "when": "textInputFocus"
-      },
-      {
-          "key": "shift+up",
-          "command": "cursorUpSelect",
-          "when": "textInputFocus && !editorFocus"
-      },
-      {
-          "key": "shift+down",
-          "command": "cursorDownSelect",
-          "when": "textInputFocus && !editorFocus"
-      },
-      {
-          "key": "ctrl+shift+down",
-          "command": "cursorDownSelect",
-          "when": "textInputFocus && !editorFocus"
-      },
-      {
-          "key": "ctrl+shift+up",
-          "command": "cursorUpSelect",
-          "when": "textInputFocus && !editorFocus"
-      },
-      {
-        "command": "bmx-local.selectLineUp",
         "key": "shift+up",
-        "when": "editorFocus"
+        "command": "-cursorUpSelect",
+        "when": "textInputFocus"
       },
       {
-        "command": "bmx-local.selectLineDown",
         "key": "shift+down",
+        "command": "-cursorDownSelect",
+        "when": "textInputFocus"
+      },
+      {
+        "key": "ctrl+shift+down",
+        "command": "-cursorDownSelect",
+        "when": "textInputFocus"
+      },
+      {
+        "key": "ctrl+shift+up",
+        "command": "-cursorUpSelect",
+        "when": "textInputFocus"
+      },
+      {
+        "key": "shift+up",
+        "command": "cursorUpSelect",
+        "when": "textInputFocus && !editorFocus"
+      },
+      {
+        "key": "shift+down",
+        "command": "cursorDownSelect",
+        "when": "textInputFocus && !editorFocus"
+      },
+      {
+        "key": "ctrl+shift+down",
+        "command": "cursorDownSelect",
+        "when": "textInputFocus && !editorFocus"
+      },
+      {
+        "key": "ctrl+shift+up",
+        "command": "cursorUpSelect",
+        "when": "textInputFocus && !editorFocus"
+      },
+      {
+        "command": "bmx-local.cursorUp",
+        "key": "shift+up",
+        "args": {
+          "select": true
+        },
         "when": "editorFocus"
       },
       {
-        "command": "bmx-local.selectLineUp",
+        "command": "bmx-local.cursorDown",
+        "key": "shift+down",
         "args": {
-          "amount": 10
+          "select": true
+        },
+        "when": "editorFocus"
+      },
+      {
+        "command": "bmx-local.cursorUp",
+        "args": {
+          "amount": 10,
+          "select": true
         },
         "key": "ctrl+shift+up",
         "when": "editorFocus"
       },
       {
-        "command": "bmx-local.selectLineDown",
+        "command": "bmx-local.cursorDown",
         "args": {
-          "amount": 10
+          "amount": 10,
+          "select": true
         },
         "key": "ctrl+shift+down",
         "when": "editorFocus"
       },
-
-
-
+      {
+        "command": "bmx-local.cursorUp",
+        "args": {
+          "amountPercent": 10,
+          "amountMin": 20
+        },
+        "key": "ctrl+alt+shift+up",
+        "when": "editorFocus"
+      },
+      {
+        "command": "bmx-local.cursorDown",
+        "args": {
+          "amountPercent": 10,
+          "amountMin": 20
+        },
+        "key": "ctrl+alt+shift+down",
+        "when": "editorFocus"
+      },
       {
         "key": "ctrl+q",
         "command": "-workbench.action.quickOpenView"
@@ -125,9 +154,6 @@
         "key": "ctrl+q",
         "command": "bmx-local.multiStateFold"
       },
-
-
-
       {
         "key": "ctrl+b",
         "command": "-workbench.action.toggleSidebarVisibility"
@@ -136,10 +162,10 @@
         "key": "ctrl+b",
         "command": "runCommands",
         "args": {
-            "commands": [
-                "workbench.action.toggleActivityBarVisibility",
-                "workbench.action.toggleSidebarVisibility"
-            ]
+          "commands": [
+            "workbench.action.toggleActivityBarVisibility",
+            "workbench.action.toggleSidebarVisibility"
+          ]
         },
         "when": "(config.workbench.activityBar.location != 'hidden' && sideBarVisible) || (config.workbench.activityBar.location == 'hidden' && !sideBarVisible)"
       },
@@ -147,9 +173,9 @@
         "key": "ctrl+b",
         "command": "runCommands",
         "args": {
-            "commands": [
-                "workbench.action.toggleSidebarVisibility"
-            ]
+          "commands": [
+            "workbench.action.toggleSidebarVisibility"
+          ]
         },
         "when": "(config.workbench.activityBar.location == 'hidden' && sideBarVisible) || (config.workbench.activityBar.location != 'hidden' && !sideBarVisible)"
       }
@@ -167,17 +193,16 @@
     "test": "vscode-test"
   },
   "devDependencies": {
-    "@types/vscode": "^1.88.0",
     "@types/mocha": "^10.0.6",
     "@types/node": "18.x",
+    "@types/vscode": "^1.88.0",
     "@typescript-eslint/eslint-plugin": "^7.4.0",
     "@typescript-eslint/parser": "^7.4.0",
-    "eslint": "^8.57.0",
-    "typescript": "^5.3.3",
-    "ts-loader": "^9.5.1",
-    "webpack": "^5.91.0",
-    "webpack-cli": "^5.1.4",
     "@vscode/test-cli": "^0.0.8",
-    "@vscode/test-electron": "^2.3.9"
+    "@vscode/test-electron": "^2.3.9",
+    "eslint": "^8.57.0",
+    "ts-loader": "^9.5.1",
+    "typescript": "^5.3.3",
+    "webpack-cli": "^5.1.4"
   }
 }

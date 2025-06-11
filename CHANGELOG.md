@@ -1,5 +1,15 @@
 # Changelog
 
+## Version 0.2.0
+
+### Changed
+- Replace `selectLineUp` and `selectLineDown` with `cursorUp` and `cursorDown`.
+
+### Added
+- Add `select` boolean argument to `cursorUp` and `cursorDown` to enable text selection in addition to cursor movement.
+- Add `amountPercent` integer argument to `cursorUp` and `cursorDown` that allows specifying amount as a percentage of the active file size.
+- Add `amountMin` and `amountMax` to `cursorUp` and `cursorDown` to provide a way to keep the amount in percent in a certain range regardless of file size.
+
 ## Version 0.1.0
 
 ### Added
